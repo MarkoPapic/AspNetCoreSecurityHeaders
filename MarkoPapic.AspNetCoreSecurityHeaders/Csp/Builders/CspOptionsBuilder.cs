@@ -1,9 +1,9 @@
 ﻿using MarkoPapic.AspNetCoreSecurityHeaders.Csp.Options;
-using System.Text;
+using System.Collections.Generic;
 
 namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 {
-	public class CspOptionsBuilder
+    public class CspOptionsBuilder
 	{
         private bool blockAllMixedContent;
         private bool upgrateInsecureRequests;
@@ -36,92 +36,92 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 
         internal CspOptions Build()
 		{
-			StringBuilder sb = new StringBuilder();
+            List<string> directives = new List<string>();
 
 			string connectSourcesString = ConnectSources.Build();
 			if (!string.IsNullOrEmpty(connectSourcesString))
-				sb.Append($"connect-src {connectSourcesString}");
+				directives.Add($"connect-src {connectSourcesString}");
 
 			string defaultResourcesString = DefaultSources.Build();
 			if (!string.IsNullOrEmpty(defaultResourcesString))
-				sb.Append($"default-src {defaultResourcesString}");
+				directives.Add($"default-src {defaultResourcesString}");
 
 			string fontSourcesString = FontSources.Build();
 			if (!string.IsNullOrEmpty(fontSourcesString))
-				sb.Append($"font-src {fontSourcesString}");
+				directives.Add($"font-src {fontSourcesString}");
 
 			string frameSourcesString = FrameSources.Build();
 			if (!string.IsNullOrEmpty(frameSourcesString))
-				sb.Append($"frame-src {frameSourcesString}");
+				directives.Add($"frame-src {frameSourcesString}");
 
 			string imgSourcesString = ImgSources.Build();
 			if (!string.IsNullOrEmpty(imgSourcesString))
-				sb.Append($"img-src {imgSourcesString}");
+				directives.Add($"img-src {imgSourcesString}");
 
 			string manifestSourcesString = ManifestSources.Build();
 			if (!string.IsNullOrEmpty(manifestSourcesString))
-				sb.Append($"manifest-src {manifestSourcesString}");
+				directives.Add($"manifest-src {manifestSourcesString}");
 
 			string mediaSourcesString = MediaSources.Build();
 			if (!string.IsNullOrEmpty(mediaSourcesString))
-				sb.Append($"media-src {mediaSourcesString}");
+				directives.Add($"media-src {mediaSourcesString}");
 
 			string objectSourcesString = ObjectSources.Build();
 			if (!string.IsNullOrEmpty(objectSourcesString))
-				sb.Append($"object-src {objectSourcesString}");
+				directives.Add($"object-src {objectSourcesString}");
 
 			string prefetchSourcesString = PrefetchSources.Build();
 			if (!string.IsNullOrEmpty(prefetchSourcesString))
-				sb.Append($"prefetch-src {prefetchSourcesString}");
+				directives.Add($"prefetch-src {prefetchSourcesString}");
 
 			string scriptSourcesString = ScriptSources.Build();
 			if (!string.IsNullOrEmpty(scriptSourcesString))
-				sb.Append($"script-src {scriptSourcesString}");
+				directives.Add($"script-src {scriptSourcesString}");
 
 			string styleSourcesString = StyleSources.Build();
 			if (!string.IsNullOrEmpty(scriptSourcesString))
-				sb.Append($"script-src {scriptSourcesString}");
+				directives.Add($"script-src {scriptSourcesString}");
 
 			string webrtcSourcesString = WebRtcSources.Build();
 			if (!string.IsNullOrEmpty(webrtcSourcesString))
-				sb.Append($"webrtc-src {webrtcSourcesString}");
+				directives.Add($"webrtc-src {webrtcSourcesString}");
 
 			string workerSourcesString = WorkerSources.Build();
 			if (!string.IsNullOrEmpty(workerSourcesString))
-				sb.Append($"worker-src {workerSourcesString}");
+				directives.Add($"worker-src {workerSourcesString}");
 
 			string baseUriString = BaseUri.Build();
 			if (!string.IsNullOrEmpty(baseUriString))
-				sb.Append($"base-uri {baseUriString}");
+				directives.Add($"base-uri {baseUriString}");
 
 			string pluginTypesString = PluginTypes.Build();
 			if (!string.IsNullOrEmpty(pluginTypesString))
-				sb.Append($"plugin-types {pluginTypesString}");
+				directives.Add($"plugin-types {pluginTypesString}");
 
             string sanboxOptionsString = Sandbox.Build();
             if (!string.IsNullOrEmpty(sanboxOptionsString))
-                sb.Append($"sandbox {sanboxOptionsString}");
+                directives.Add($"sandbox {sanboxOptionsString}");
 
             string formActionString = FormAction.Build();
             if (!string.IsNullOrEmpty(formActionString))
-                sb.Append($"form-action {formActionString}");
+                directives.Add($"form-action {formActionString}");
 
             string frameAncestors = FrameAncestors.Build();
             if (!string.IsNullOrEmpty(frameAncestors))
-                sb.Append($"frame-ancestors {frameAncestors}");
+                directives.Add($"frame-ancestors {frameAncestors}");
 
             if (upgrateInsecureRequests)
-                sb.Append("upgrade-insecure-requests");
+                directives.Add("upgrade-insecure-requests");
 
             if (blockAllMixedContent)
-                sb.Append("block-all-mixed-content");
+                directives.Add("block-all-mixed-content");
 
             string requireSriForString = RequireSriFor.Build();
             if (!string.IsNullOrEmpty(requireSriForString))
-                sb.Append($"require-sri-for {requireSriForString}");
+                directives.Add($"require-sri-for {requireSriForString}");
 
             CspOptions options = new CspOptions {
-				Content = sb.ToString()
+                Content = string.Join("; ", directives)
 			};
 
 			return options;

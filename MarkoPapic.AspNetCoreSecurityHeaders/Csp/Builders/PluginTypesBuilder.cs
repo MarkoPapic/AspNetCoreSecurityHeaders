@@ -31,7 +31,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
             return this;
         }
 
-		public string Build()
+		internal string Build()
 		{
 			List<string> parts = new List<string>();
 

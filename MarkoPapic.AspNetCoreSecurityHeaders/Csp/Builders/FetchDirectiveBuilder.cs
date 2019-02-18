@@ -23,13 +23,6 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 			hashesAllowed = new List<string>();
 		}
 
-        /*public FetchDirectiveBuilder Allow(string source)
-        {
-            if (!sourcesAllowed.Contains(source))
-                sourcesAllowed.Add(source);
-            return this;
-        }*/
-
 		public FetchDirectiveBuilder AllowNone() {
 			noneAllowed = true;
 			return this;
@@ -114,7 +107,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 			return this;
 		}
 
-		public string Build()
+		internal string Build()
 		{
 			List<string> parts = new List<string>();
 

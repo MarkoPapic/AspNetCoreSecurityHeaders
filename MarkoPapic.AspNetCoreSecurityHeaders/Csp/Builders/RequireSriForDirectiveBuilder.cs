@@ -20,7 +20,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
             value = "script style";
         }
 
-        public string Build()
+        internal string Build()
         {
             return value;
         }
