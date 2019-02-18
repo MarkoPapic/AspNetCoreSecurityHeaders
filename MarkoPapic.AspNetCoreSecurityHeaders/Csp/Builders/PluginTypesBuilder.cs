@@ -13,31 +13,23 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 			mimeTypesAllowed = new List<string>();
 		}
 
-		public PluginTypesBuilder AllowMimeType(string mimeType)
-		{
-			PluginTypesBuilder result = this;
-			if (!noneAllowed && !allAllowed)
-				mimeTypesAllowed.Add(mimeType);
-			return result;
-		}
+        public PluginTypesBuilder AllowMimeType(string mimeType)
+        {
+            mimeTypesAllowed.Add(mimeType);
+            return this;
+        }
 
 		public PluginTypesBuilder AllowNone()
 		{
 			noneAllowed = true;
-			allAllowed = false;
-			mimeTypesAllowed.Clear();
 			return this;
 		}
 
-		public PluginTypesBuilder AllowAny()
-		{
-			if (!noneAllowed)
-			{
-				allAllowed = true;
-				mimeTypesAllowed.Clear();
-			}
-			return this;
-		}
+        public PluginTypesBuilder AllowAny()
+        {
+            allAllowed = true;
+            return this;
+        }
 
 		public string Build()
 		{

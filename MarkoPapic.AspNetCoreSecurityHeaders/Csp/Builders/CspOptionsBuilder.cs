@@ -5,6 +5,9 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 {
 	public class CspOptionsBuilder
 	{
+        private bool blockAllMixedContent;
+        private bool upgrateInsecureRequests;
+
 		public FetchDirectiveBuilder ConnectSources => new FetchDirectiveBuilder();
 		public FetchDirectiveBuilder DefaultSources => new FetchDirectiveBuilder();
 		public FetchDirectiveBuilder FontSources => new FetchDirectiveBuilder();
@@ -20,8 +23,18 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 		public FetchDirectiveBuilder WorkerSources => new FetchDirectiveBuilder();
 		public BaseUriDirectiveBuilder BaseUri => new BaseUriDirectiveBuilder();
 		public PluginTypesBuilder PluginTypes => new PluginTypesBuilder();
+        public SandboxDirectiveBuilder Sandbox => new SandboxDirectiveBuilder();
+        //TODO: disown-opener
+        public FormActionDirectiveBuilder FormAction => new FormActionDirectiveBuilder();
+        public FrameAncestorsDirectiveBuilder FrameAncestors => new FrameAncestorsDirectiveBuilder();
+        //TODO: navigate-to
+        //TODO: report-to
+        public void BlockAllMixedContent() => blockAllMixedContent = true;
+        public RequireSriForDirectiveBuilder RequireSriFor => new RequireSriForDirectiveBuilder();
+        public void UpgradeInsecureRequests() => upgrateInsecureRequests = true;
 
-		internal CspOptions Build()
+
+        internal CspOptions Build()
 		{
 			StringBuilder sb = new StringBuilder();
 
@@ -81,11 +94,33 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 			if (!string.IsNullOrEmpty(baseUriString))
 				sb.Append($"base-uri {baseUriString}");
 
-			string pluginTypes = PluginTypes.Build();
-			if (!string.IsNullOrEmpty(pluginTypes))
-				sb.Append($"plugin-types {pluginTypes}");
+			string pluginTypesString = PluginTypes.Build();
+			if (!string.IsNullOrEmpty(pluginTypesString))
+				sb.Append($"plugin-types {pluginTypesString}");
 
-			CspOptions options = new CspOptions {
+            string sanboxOptionsString = Sandbox.Build();
+            if (!string.IsNullOrEmpty(sanboxOptionsString))
+                sb.Append($"sandbox {sanboxOptionsString}");
+
+            string formActionString = FormAction.Build();
+            if (!string.IsNullOrEmpty(formActionString))
+                sb.Append($"form-action {formActionString}");
+
+            string frameAncestors = FrameAncestors.Build();
+            if (!string.IsNullOrEmpty(frameAncestors))
+                sb.Append($"frame-ancestors {frameAncestors}");
+
+            if (upgrateInsecureRequests)
+                sb.Append("upgrade-insecure-requests");
+
+            if (blockAllMixedContent)
+                sb.Append("block-all-mixed-content");
+
+            string requireSriForString = RequireSriFor.Build();
+            if (!string.IsNullOrEmpty(requireSriForString))
+                sb.Append($"require-sri-for {requireSriForString}");
+
+            CspOptions options = new CspOptions {
 				Content = sb.ToString()
 			};
 

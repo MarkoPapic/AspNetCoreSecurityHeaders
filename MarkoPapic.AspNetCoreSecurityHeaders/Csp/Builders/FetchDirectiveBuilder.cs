@@ -23,65 +23,55 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 			hashesAllowed = new List<string>();
 		}
 
-		public FetchDirectiveBuilder Allow(string source) {
-			FetchDirectiveBuilder result = this;
-			if (source == "none" || source == "'none'")
-				result = AllowNone();
-			else if (source == "'*'")
-				result = AllowNone();
-			else if (!noneAllowed && !allAllowed)
-				if (!sourcesAllowed.Contains(source))
-					sourcesAllowed.Add(source);
-			return result;
-		}
+        /*public FetchDirectiveBuilder Allow(string source)
+        {
+            if (!sourcesAllowed.Contains(source))
+                sourcesAllowed.Add(source);
+            return this;
+        }*/
 
 		public FetchDirectiveBuilder AllowNone() {
 			noneAllowed = true;
-			allAllowed = false;
-			unsafeEvalAllowed = false;
-			unsafeInlineAllowed = false;
-			sourcesAllowed.Clear();
-			noncesAllowed.Clear();
-			hashesAllowed.Clear();
 			return this;
 		}
 
 		public FetchDirectiveBuilder AllowSelf()
 		{
-			return Allow("'self'");
-		}
+            string item = "'self'";
+            if (!sourcesAllowed.Contains(item))
+                sourcesAllowed.Add(item);
+            return this;
+        }
 
 		public FetchDirectiveBuilder AllowAny() {
-			if (!noneAllowed)
-			{
-				allAllowed = true;
-				sourcesAllowed.Clear();
-			}
+            allAllowed = true;
 			return this;
 		}
 
 		public FetchDirectiveBuilder AllowHosts(params string[] hosts)
 		{
-			string hostsMerged = string.Join(" ", hosts);
-			return Allow(hostsMerged);
-		}
+			foreach(string host in hosts)
+                if (!sourcesAllowed.Contains(host))
+                    sourcesAllowed.Add(host);
+            return this;
+        }
 
 		public FetchDirectiveBuilder AllowSchemas(params string[] schemas)
 		{
-			string schemasMerged = string.Join(" ", schemas);
-			return Allow(schemasMerged);
+			foreach(string schema in schemas)
+                if (!sourcesAllowed.Contains(schema))
+                    sourcesAllowed.Add(schema);
+            return this;
 		}
 
 		public FetchDirectiveBuilder AllowUnsafeInline() {
-			if (!noneAllowed)
-				unsafeInlineAllowed = true;
+            unsafeInlineAllowed = true;
 			return this;
 		}
 
 		public FetchDirectiveBuilder AllowUnsafeEval()
 		{
-			if (!noneAllowed)
-				unsafeEvalAllowed = true;
+			unsafeEvalAllowed = true;
 			return this;
 		}
 
@@ -90,39 +80,31 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 
 			if (nonceService == null)
 				throw new ArgumentNullException(nameof(nonceService));
-			if (!noneAllowed)
-			{
-				string nonce = nonceService.GetNonce();
-				string item = $"'nonce-{nonce}'";
-				if (!noncesAllowed.Contains(item))
-					noncesAllowed.Add(item);
-			}
+			string nonce = nonceService.GetNonce();
+			string item = $"'nonce-{nonce}'";
+			if (!noncesAllowed.Contains(item))
+				noncesAllowed.Add(item);
 			return this;
 		}
 
 		public FetchDirectiveBuilder AllowHash(string item)
 		{
-			if (!noneAllowed)
-				if (!hashesAllowed.Contains(item))
-					hashesAllowed.Add(item);
+			if (!hashesAllowed.Contains(item))
+                hashesAllowed.Add(item);
 			return this;
 		}
 
-		public FetchDirectiveBuilder AllowHash(string algorithm, string hashedSource)
-		{
-			if (!noneAllowed)
-			{
-				string item = $"{algorithm}-{hashedSource}";
-				if (!hashesAllowed.Contains(item))
-					hashesAllowed.Add(item);
-			}
-			return this;
-		}
+        public FetchDirectiveBuilder AllowHash(string algorithm, string hashedSource)
+        {
+            string item = $"{algorithm}-{hashedSource}";
+            if (!hashesAllowed.Contains(item))
+                hashesAllowed.Add(item);
+            return this;
+        }
 
 		public FetchDirectiveBuilder WithStrictDynamic()
 		{
-			if (!noneAllowed)
-				withStrictDynamic = true;
+            withStrictDynamic = true;
 			return this;
 		}
 
