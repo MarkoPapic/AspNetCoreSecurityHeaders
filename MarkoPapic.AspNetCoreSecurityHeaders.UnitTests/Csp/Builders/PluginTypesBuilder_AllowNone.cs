@@ -1,15 +1,16 @@
-﻿using MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders;
+﻿using System;
+using MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders;
 using Xunit;
 
 namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 {
-    public class FetchDirectiveBuilder_AllowNone
+    public class PluginTypesBuilder_AllowNone
     {
         [Fact]
         public void NothingElseCalled_NoneReturned()
         {
             //Arrange
-            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+            PluginTypesBuilder builder = new PluginTypesBuilder();
 
             //Act
             builder.AllowNone();
@@ -23,13 +24,11 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
         public void SomethingElseCalled_OnlyNoneReturned()
         {
             //Arrange
-            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+            PluginTypesBuilder builder = new PluginTypesBuilder();
 
             //Act
-            builder.AllowSelf();
-            builder.AllowHosts("https://example1.com", "https://example2.com");
+            builder.AllowMimeType("img/png");
             builder.AllowNone();
-            builder.AllowSchemas("blob:");
             builder.AllowAny();
 
             //Assert
@@ -41,7 +40,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
         public void DuplicateNoneAllowed_DuplicatesRemoved()
         {
             //Arrange
-            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+            PluginTypesBuilder builder = new PluginTypesBuilder();
 
             //Act
             builder.AllowNone().AllowNone();

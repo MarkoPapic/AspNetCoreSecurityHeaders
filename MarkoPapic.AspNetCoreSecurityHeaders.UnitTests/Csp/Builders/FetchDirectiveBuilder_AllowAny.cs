@@ -64,5 +64,19 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 			string result = builder.Build();
 			Assert.Equal("'*'", result);
 		}
-	}
+
+        [Fact]
+        public void DuplicateAnyAllowed_DuplicatesRemoved()
+        {
+            //Arrange
+            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+
+            //Act
+            builder.AllowAny().AllowAny();
+
+            //Assert
+            string result = builder.Build();
+            Assert.Equal("'*'", result);
+        }
+    }
 }

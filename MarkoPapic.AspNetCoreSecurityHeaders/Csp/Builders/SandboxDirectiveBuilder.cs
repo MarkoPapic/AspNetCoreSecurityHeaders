@@ -118,7 +118,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
                 if (scriptsAllowed)
                     parts.Add("allow-scripts");
                 if (topNavigationAllowed)
-                    parts.Add("allow-top-navigtion");
+                    parts.Add("allow-top-navigation");
             }
 
             return string.Join(" ", parts);

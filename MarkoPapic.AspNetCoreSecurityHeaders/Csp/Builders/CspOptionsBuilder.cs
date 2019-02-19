@@ -4,99 +4,122 @@ using System.Collections.Generic;
 namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 {
     public class CspOptionsBuilder
-	{
+    {
         private bool blockAllMixedContent;
         private bool upgrateInsecureRequests;
 
-		public FetchDirectiveBuilder ConnectSources => new FetchDirectiveBuilder();
-		public FetchDirectiveBuilder DefaultSources => new FetchDirectiveBuilder();
-		public FetchDirectiveBuilder FontSources => new FetchDirectiveBuilder();
-		public FetchDirectiveBuilder FrameSources => new FetchDirectiveBuilder();
-		public FetchDirectiveBuilder ImgSources => new FetchDirectiveBuilder();
-		public FetchDirectiveBuilder ManifestSources => new FetchDirectiveBuilder();
-		public FetchDirectiveBuilder MediaSources => new FetchDirectiveBuilder();
-		public FetchDirectiveBuilder ObjectSources => new FetchDirectiveBuilder();
-		public FetchDirectiveBuilder PrefetchSources => new FetchDirectiveBuilder();
-		public FetchDirectiveBuilder ScriptSources => new FetchDirectiveBuilder();
-		public FetchDirectiveBuilder StyleSources => new FetchDirectiveBuilder();
-		public FetchDirectiveBuilder WebRtcSources => new FetchDirectiveBuilder();
-		public FetchDirectiveBuilder WorkerSources => new FetchDirectiveBuilder();
-		public BaseUriDirectiveBuilder BaseUri => new BaseUriDirectiveBuilder();
-		public PluginTypesBuilder PluginTypes => new PluginTypesBuilder();
-        public SandboxDirectiveBuilder Sandbox => new SandboxDirectiveBuilder();
+        public CspOptionsBuilder()
+        {
+            ConnectSources = new FetchDirectiveBuilder();
+            DefaultSources = new FetchDirectiveBuilder();
+            FontSources = new FetchDirectiveBuilder();
+            FrameSources = new FetchDirectiveBuilder();
+            ImgSources = new FetchDirectiveBuilder();
+            ManifestSources = new FetchDirectiveBuilder();
+            MediaSources = new FetchDirectiveBuilder();
+            ObjectSources = new FetchDirectiveBuilder();
+            PrefetchSources = new FetchDirectiveBuilder();
+            ScriptSources = new FetchDirectiveBuilder();
+            StyleSources = new FetchDirectiveBuilder();
+            WebRtcSources = new FetchDirectiveBuilder();
+            WorkerSources = new FetchDirectiveBuilder();
+            BaseUri = new BaseUriDirectiveBuilder();
+            PluginTypes = new PluginTypesBuilder();
+            Sandbox = new SandboxDirectiveBuilder();
+            FormAction = new FormActionDirectiveBuilder();
+            FrameAncestors = new FrameAncestorsDirectiveBuilder();
+            RequireSriFor = new RequireSriForDirectiveBuilder();
+        }
+
+        public FetchDirectiveBuilder ConnectSources { get; }
+        public FetchDirectiveBuilder DefaultSources { get; }
+        public FetchDirectiveBuilder FontSources { get; }
+        public FetchDirectiveBuilder FrameSources { get; }
+        public FetchDirectiveBuilder ImgSources { get; }
+        public FetchDirectiveBuilder ManifestSources { get; }
+        public FetchDirectiveBuilder MediaSources { get; }
+        public FetchDirectiveBuilder ObjectSources { get; }
+        public FetchDirectiveBuilder PrefetchSources { get; }
+        public FetchDirectiveBuilder ScriptSources { get; }
+        public FetchDirectiveBuilder StyleSources { get; }
+        public FetchDirectiveBuilder WebRtcSources { get; }
+        public FetchDirectiveBuilder WorkerSources { get; }
+        public BaseUriDirectiveBuilder BaseUri { get; }
+        public PluginTypesBuilder PluginTypes { get; }
+        public SandboxDirectiveBuilder Sandbox { get; }
         //TODO: disown-opener
-        public FormActionDirectiveBuilder FormAction => new FormActionDirectiveBuilder();
-        public FrameAncestorsDirectiveBuilder FrameAncestors => new FrameAncestorsDirectiveBuilder();
+        public FormActionDirectiveBuilder FormAction { get; }
+        public FrameAncestorsDirectiveBuilder FrameAncestors { get; }
         //TODO: navigate-to
         //TODO: report-to
         public void BlockAllMixedContent() => blockAllMixedContent = true;
-        public RequireSriForDirectiveBuilder RequireSriFor => new RequireSriForDirectiveBuilder();
+        public RequireSriForDirectiveBuilder RequireSriFor { get; }
         public void UpgradeInsecureRequests() => upgrateInsecureRequests = true;
 
 
         internal CspOptions Build()
-		{
+        {
             List<string> directives = new List<string>();
 
-			string connectSourcesString = ConnectSources.Build();
-			if (!string.IsNullOrEmpty(connectSourcesString))
-				directives.Add($"connect-src {connectSourcesString}");
+            string connectSourcesString = ConnectSources.Build();
+            if (!string.IsNullOrEmpty(connectSourcesString))
+                directives.Add($"connect-src {connectSourcesString}");
 
-			string defaultResourcesString = DefaultSources.Build();
-			if (!string.IsNullOrEmpty(defaultResourcesString))
-				directives.Add($"default-src {defaultResourcesString}");
+            string defaultResourcesString = DefaultSources.Build();
+            if (!string.IsNullOrEmpty(defaultResourcesString))
+                directives.Add($"default-src {defaultResourcesString}");
 
-			string fontSourcesString = FontSources.Build();
-			if (!string.IsNullOrEmpty(fontSourcesString))
-				directives.Add($"font-src {fontSourcesString}");
+            string fontSourcesString = FontSources.Build();
+            if (!string.IsNullOrEmpty(fontSourcesString))
+                directives.Add($"font-src {fontSourcesString}");
 
-			string frameSourcesString = FrameSources.Build();
-			if (!string.IsNullOrEmpty(frameSourcesString))
-				directives.Add($"frame-src {frameSourcesString}");
+            string frameSourcesString = FrameSources.Build();
+            if (!string.IsNullOrEmpty(frameSourcesString))
+                directives.Add($"frame-src {frameSourcesString}");
 
-			string imgSourcesString = ImgSources.Build();
-			if (!string.IsNullOrEmpty(imgSourcesString))
-				directives.Add($"img-src {imgSourcesString}");
+            string imgSourcesString = ImgSources.Build();
+            if (!string.IsNullOrEmpty(imgSourcesString))
+                directives.Add($"img-src {imgSourcesString}");
 
-			string manifestSourcesString = ManifestSources.Build();
-			if (!string.IsNullOrEmpty(manifestSourcesString))
-				directives.Add($"manifest-src {manifestSourcesString}");
+            string manifestSourcesString = ManifestSources.Build();
+            if (!string.IsNullOrEmpty(manifestSourcesString))
+                directives.Add($"manifest-src {manifestSourcesString}");
 
-			string mediaSourcesString = MediaSources.Build();
-			if (!string.IsNullOrEmpty(mediaSourcesString))
-				directives.Add($"media-src {mediaSourcesString}");
+            string mediaSourcesString = MediaSources.Build();
+            if (!string.IsNullOrEmpty(mediaSourcesString))
+                directives.Add($"media-src {mediaSourcesString}");
 
-			string objectSourcesString = ObjectSources.Build();
-			if (!string.IsNullOrEmpty(objectSourcesString))
-				directives.Add($"object-src {objectSourcesString}");
+            string objectSourcesString = ObjectSources.Build();
+            if (!string.IsNullOrEmpty(objectSourcesString))
+                directives.Add($"object-src {objectSourcesString}");
 
-			string prefetchSourcesString = PrefetchSources.Build();
-			if (!string.IsNullOrEmpty(prefetchSourcesString))
-				directives.Add($"prefetch-src {prefetchSourcesString}");
+            string prefetchSourcesString = PrefetchSources.Build();
+            if (!string.IsNullOrEmpty(prefetchSourcesString))
+                directives.Add($"prefetch-src {prefetchSourcesString}");
 
-			string scriptSourcesString = ScriptSources.Build();
-			if (!string.IsNullOrEmpty(scriptSourcesString))
-				directives.Add($"script-src {scriptSourcesString}");
+            string scriptSourcesString = ScriptSources.Build();
+            if (!string.IsNullOrEmpty(scriptSourcesString))
+                directives.Add($"script-src {scriptSourcesString}");
 
-			string styleSourcesString = StyleSources.Build();
-			if (!string.IsNullOrEmpty(scriptSourcesString))
-				directives.Add($"script-src {scriptSourcesString}");
+            string styleSourcesString = StyleSources.Build();
+            if (!string.IsNullOrEmpty(styleSourcesString))
+                directives.Add($"style-src {styleSourcesString}");
 
-			string webrtcSourcesString = WebRtcSources.Build();
-			if (!string.IsNullOrEmpty(webrtcSourcesString))
-				directives.Add($"webrtc-src {webrtcSourcesString}");
+            string webrtcSourcesString = WebRtcSources.Build();
+            if (!string.IsNullOrEmpty(webrtcSourcesString))
+                directives.Add($"webrtc-src {webrtcSourcesString}");
 
-			string workerSourcesString = WorkerSources.Build();
-			if (!string.IsNullOrEmpty(workerSourcesString))
-				directives.Add($"worker-src {workerSourcesString}");
+            string workerSourcesString = WorkerSources.Build();
+            if (!string.IsNullOrEmpty(workerSourcesString))
+                directives.Add($"worker-src {workerSourcesString}");
 
-			string baseUriString = BaseUri.Build();
-			if (!string.IsNullOrEmpty(baseUriString))
-				directives.Add($"base-uri {baseUriString}");
+            string baseUriString = BaseUri.Build();
+            if (!string.IsNullOrEmpty(baseUriString))
+                directives.Add($"base-uri {baseUriString}");
 
-			string pluginTypesString = PluginTypes.Build();
-			if (!string.IsNullOrEmpty(pluginTypesString))
-				directives.Add($"plugin-types {pluginTypesString}");
+            string pluginTypesString = PluginTypes.Build();
+            if (!string.IsNullOrEmpty(pluginTypesString))
+                directives.Add($"plugin-types {pluginTypesString}");
 
             string sanboxOptionsString = Sandbox.Build();
             if (!string.IsNullOrEmpty(sanboxOptionsString))
@@ -120,11 +143,12 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
             if (!string.IsNullOrEmpty(requireSriForString))
                 directives.Add($"require-sri-for {requireSriForString}");
 
-            CspOptions options = new CspOptions {
+            CspOptions options = new CspOptions
+            {
                 Content = string.Join("; ", directives)
-			};
+            };
 
-			return options;
-		}
-	}
+            return options;
+        }
+    }
 }

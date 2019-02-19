@@ -33,5 +33,19 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 			string result = builder.Build();
 			Assert.Equal("'unsafe-eval' '*'", result);
 		}
-	}
+
+        [Fact]
+        public void DuplicateUnsafeEvalAllowed_DuplicatesRemoved()
+        {
+            //Arrange
+            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+
+            //Act
+            builder.AllowUnsafeEval().AllowUnsafeEval();
+
+            //Assert
+            string result = builder.Build();
+            Assert.Equal("'unsafe-eval'", result);
+        }
+    }
 }

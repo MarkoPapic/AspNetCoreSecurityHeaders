@@ -18,7 +18,8 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp
 		public async Task Invoke(HttpContext context)
 		{
 			string csp = options.Content;
-			context.Response.Headers.Add("Content-Security-Policy", csp);
+            if (!string.IsNullOrWhiteSpace(csp))
+			    context.Response.Headers.Add("Content-Security-Policy", csp);
 			await this.next(context);
 		}
 	}

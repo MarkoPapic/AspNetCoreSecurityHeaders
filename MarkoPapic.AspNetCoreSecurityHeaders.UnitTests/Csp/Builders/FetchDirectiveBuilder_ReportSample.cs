@@ -33,5 +33,19 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 			string result = builder.Build();
 			Assert.Equal("'*' 'report-sample'", result);
 		}
-	}
+
+        [Fact]
+        public void DuplicateReportSampleAdded_DuplicatesRemoved()
+        {
+            //Arrange
+            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+
+            //Act
+            builder.ReportSample().ReportSample();
+
+            //Assert
+            string result = builder.Build();
+            Assert.Equal("'report-sample'", result);
+        }
+    }
 }

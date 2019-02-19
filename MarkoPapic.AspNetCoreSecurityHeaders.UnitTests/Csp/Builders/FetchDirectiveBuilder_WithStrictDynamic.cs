@@ -33,5 +33,19 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 			string result = builder.Build();
 			Assert.Equal("'strict-dynamic' '*'", result);
 		}
-	}
+
+        [Fact]
+        public void DuplicateStrictDynamicCalled_DuplicatesRemoved()
+        {
+            //Arrange
+            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+
+            //Act
+            builder.WithStrictDynamic().WithStrictDynamic();
+
+            //Assert
+            string result = builder.Build();
+            Assert.Equal("'strict-dynamic'", result);
+        }
+    }
 }

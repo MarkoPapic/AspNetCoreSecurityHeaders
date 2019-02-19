@@ -3,13 +3,13 @@ using Xunit;
 
 namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 {
-    public class FetchDirectiveBuilder_AllowNone
+    public class SandboxDirectiveBuilder_AllowNone
     {
         [Fact]
         public void NothingElseCalled_NoneReturned()
         {
             //Arrange
-            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+            SandboxDirectiveBuilder builder = new SandboxDirectiveBuilder();
 
             //Act
             builder.AllowNone();
@@ -23,13 +23,12 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
         public void SomethingElseCalled_OnlyNoneReturned()
         {
             //Arrange
-            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+            SandboxDirectiveBuilder builder = new SandboxDirectiveBuilder();
 
             //Act
-            builder.AllowSelf();
-            builder.AllowHosts("https://example1.com", "https://example2.com");
+            builder.AllowForms();
+            builder.AllowModals();
             builder.AllowNone();
-            builder.AllowSchemas("blob:");
             builder.AllowAny();
 
             //Assert
@@ -41,7 +40,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
         public void DuplicateNoneAllowed_DuplicatesRemoved()
         {
             //Arrange
-            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+            SandboxDirectiveBuilder builder = new SandboxDirectiveBuilder();
 
             //Act
             builder.AllowNone().AllowNone();

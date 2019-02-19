@@ -36,5 +36,19 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 			string result = builder.Build();
 			Assert.Equal("'self' https://example1.com", result);
 		}
-	}
+
+        [Fact]
+        public void DuplicateHostsAllowed_DuplicatesRemoved()
+        {
+            //Arrange
+            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+
+            //Act
+            builder.AllowHosts("https://example1.com", "https://example1.com");
+
+            //Assert
+            string result = builder.Build();
+            Assert.Equal("https://example1.com", result);
+        }
+    }
 }

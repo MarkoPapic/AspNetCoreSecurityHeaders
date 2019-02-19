@@ -33,5 +33,19 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 			string result = builder.Build();
 			Assert.Equal("'unsafe-inline' '*'", result);
 		}
-	}
+
+        [Fact]
+        public void DuplicateUnsafeInlineAllowed_DuplicatesRemoved()
+        {
+            //Arrange
+            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+
+            //Act
+            builder.AllowUnsafeInline().AllowUnsafeInline();
+
+            //Assert
+            string result = builder.Build();
+            Assert.Equal("'unsafe-inline'", result);
+        }
+    }
 }

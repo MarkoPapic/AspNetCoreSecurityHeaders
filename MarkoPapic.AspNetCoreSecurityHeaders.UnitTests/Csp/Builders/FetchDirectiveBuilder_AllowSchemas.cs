@@ -33,5 +33,19 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 			string result = builder.Build();
 			Assert.Equal("'self' blob:", result);
 		}
-	}
+
+        [Fact]
+        public void DuplicateSchemasAllowed_DuplicatesRemoved()
+        {
+            //Arrange
+            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+
+            //Act
+            builder.AllowSchemas("blob:", "blob:");
+
+            //Assert
+            string result = builder.Build();
+            Assert.Equal("blob:", result);
+        }
+    }
 }

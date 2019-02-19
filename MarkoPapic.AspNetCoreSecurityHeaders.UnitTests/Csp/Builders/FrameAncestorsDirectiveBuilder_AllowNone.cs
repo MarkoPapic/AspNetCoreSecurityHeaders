@@ -1,15 +1,16 @@
-﻿using MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders;
+﻿using System;
+using MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders;
 using Xunit;
 
 namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 {
-    public class FetchDirectiveBuilder_AllowNone
+    public class FrameAncestorsDirectiveBuilder_AllowNone
     {
         [Fact]
         public void NothingElseCalled_NoneReturned()
         {
             //Arrange
-            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+            FrameAncestorsDirectiveBuilder builder = new FrameAncestorsDirectiveBuilder();
 
             //Act
             builder.AllowNone();
@@ -23,7 +24,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
         public void SomethingElseCalled_OnlyNoneReturned()
         {
             //Arrange
-            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+            FrameAncestorsDirectiveBuilder builder = new FrameAncestorsDirectiveBuilder();
 
             //Act
             builder.AllowSelf();
@@ -41,7 +42,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
         public void DuplicateNoneAllowed_DuplicatesRemoved()
         {
             //Arrange
-            FetchDirectiveBuilder builder = new FetchDirectiveBuilder();
+            FrameAncestorsDirectiveBuilder builder = new FrameAncestorsDirectiveBuilder();
 
             //Act
             builder.AllowNone().AllowNone();

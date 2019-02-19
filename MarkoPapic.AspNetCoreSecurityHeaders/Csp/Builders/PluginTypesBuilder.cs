@@ -15,7 +15,8 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 
         public PluginTypesBuilder AllowMimeType(string mimeType)
         {
-            mimeTypesAllowed.Add(mimeType);
+            if (!mimeTypesAllowed.Contains(mimeType))
+                mimeTypesAllowed.Add(mimeType);
             return this;
         }
 
