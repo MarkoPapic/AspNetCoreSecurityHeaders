@@ -18,8 +18,4 @@
   <ItemGroup>
     <Compile Remove="UnitTest1.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Csp\" />
-    <Folder Include="Csp\Builders\" />
-  </ItemGroup>
 </Project>
