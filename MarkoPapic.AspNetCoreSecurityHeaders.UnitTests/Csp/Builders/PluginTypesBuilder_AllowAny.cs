@@ -16,7 +16,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 
             //Assert
             string result = builder.Build();
-            Assert.Equal("'*'", result);
+            Assert.Equal("*", result);
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 
             //Assert
             string result = builder.Build();
-            Assert.Equal("'*'", result);
+            Assert.Equal("*", result);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 
             //Assert
             string result = builder.Build();
-            Assert.Equal("'*'", result);
+            Assert.Equal("*", result);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 
 			//Assert
 			string result = builder.Build();
-			Assert.Equal("'strict-dynamic' '*'", result);
+			Assert.Equal("'strict-dynamic' *", result);
 		}
 
         [Fact]

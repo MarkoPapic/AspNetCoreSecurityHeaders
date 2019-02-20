@@ -16,7 +16,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 
 			//Assert
 			string result = builder.Build();
-			Assert.Equal("'*'", result);
+			Assert.Equal("*", result);
 		}
 
 		[Fact]
@@ -32,7 +32,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 
 			//Assert
 			string result = builder.Build();
-			Assert.Equal("'unsafe-inline' sha265-somehash '*'", result);
+			Assert.Equal("'unsafe-inline' sha265-somehash *", result);
 		}
 
 		[Fact]
@@ -47,7 +47,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 
 			//Assert
 			string result = builder.Build();
-			Assert.Equal("'*'", result);
+			Assert.Equal("*", result);
 		}
 
 		[Fact]
@@ -62,7 +62,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 
 			//Assert
 			string result = builder.Build();
-			Assert.Equal("'*'", result);
+			Assert.Equal("*", result);
 		}
 
         [Fact]
@@ -76,7 +76,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 
             //Assert
             string result = builder.Build();
-            Assert.Equal("'*'", result);
+            Assert.Equal("*", result);
         }
     }
 }

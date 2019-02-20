@@ -8,9 +8,9 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
     {
         private bool blockAllMixedContent;
         private bool upgrateInsecureRequests;
-		private ReportGroupOptions reportingGroup;
+		private ReportGroupOptions reportGroup;
 
-		public CspOptionsBuilder()
+		internal CspOptionsBuilder()
         {
             ConnectSources = new FetchDirectiveBuilder();
             DefaultSources = new FetchDirectiveBuilder();
@@ -53,15 +53,14 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
         public FormActionDirectiveBuilder FormAction { get; }
         public FrameAncestorsDirectiveBuilder FrameAncestors { get; }
         //TODO: navigate-to
-        //TODO: report-to
         public void BlockAllMixedContent() => blockAllMixedContent = true;
         public RequireSriForDirectiveBuilder RequireSriFor { get; }
         public void UpgradeInsecureRequests() => upgrateInsecureRequests = true;
 		public void AddReportingGroup(Action<ReportGroupOptions> optionsAction)
 		{
-			var rg = new ReportGroupOptions();
+			ReportGroupOptions rg = new ReportGroupOptions();
 			optionsAction(rg);
-			reportingGroup = rg;
+			reportGroup = rg;
 		}
 
 		internal CspOptions Build()
@@ -150,13 +149,13 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
             if (!string.IsNullOrEmpty(requireSriForString))
                 directives.Add($"require-sri-for {requireSriForString}");
 
-			if (reportingGroup != null)
-				directives.Add($"report-to {reportingGroup.Group}");
+			if (reportGroup != null)
+				directives.Add($"report-to {reportGroup.Group}");
 
             CspOptions options = new CspOptions
             {
                 Content = string.Join("; ", directives),
-				ReportingGroup = reportingGroup
+				ReportingGroup = reportGroup
             };
 
             return options;

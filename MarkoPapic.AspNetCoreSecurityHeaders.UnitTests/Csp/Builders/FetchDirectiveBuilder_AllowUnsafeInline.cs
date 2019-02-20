@@ -31,7 +31,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 
 			//Assert
 			string result = builder.Build();
-			Assert.Equal("'unsafe-inline' '*'", result);
+			Assert.Equal("'unsafe-inline' *", result);
 		}
 
         [Fact]
