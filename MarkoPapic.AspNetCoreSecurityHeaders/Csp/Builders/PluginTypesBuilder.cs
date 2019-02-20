@@ -39,7 +39,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 			if (noneAllowed)
 				parts.Add("'none'");
 			else if (allAllowed)
-				parts.Add("'*'");
+				parts.Add("*");
 			else if (mimeTypesAllowed.Count > 0)
 				parts.AddRange(mimeTypesAllowed);
 

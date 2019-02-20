@@ -128,7 +128,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 				if (hashesAllowed.Count > 0)
 					parts.AddRange(hashesAllowed);
 				if (allAllowed)
-					parts.Add("'*'");
+					parts.Add("*");
 				else if (sourcesAllowed.Count > 0)
 					parts.AddRange(sourcesAllowed);
 				if (reportSample)
