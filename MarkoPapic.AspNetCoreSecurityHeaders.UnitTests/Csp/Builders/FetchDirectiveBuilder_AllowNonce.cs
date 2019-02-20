@@ -39,7 +39,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 
             //Assert
             string result = builder.Build();
-            Assert.Equal($"'nonce-{generatedNonce}' '*'", result);
+            Assert.Equal($"'nonce-{generatedNonce}' *", result);
         }
 
         [Fact]

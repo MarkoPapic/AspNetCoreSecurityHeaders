@@ -1,8 +1,5 @@
 ﻿using MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders;
 using MarkoPapic.AspNetCoreSecurityHeaders.Csp.Options;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
@@ -18,7 +15,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 			//Act
 			builder.AddReportingGroup(reportingOptions => {
 				reportingOptions.Group = "groupname";
-				reportingOptions.Endpoints.Add(new Endpoint("https://example.com/route"));
+				reportingOptions.Endpoints.Add(new ReportGroupEndpoint("https://example.com/route"));
 			});
 
 			//Assert

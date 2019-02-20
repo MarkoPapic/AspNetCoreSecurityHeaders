@@ -49,7 +49,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 
             //Assert
             string result = builder.Build();
-            Assert.Equal($"{inputValue} '*'", result);
+            Assert.Equal($"{inputValue} *", result);
         }
 
         [Fact]
@@ -66,7 +66,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Csp.Builders
 
             //Assert
             string result = builder.Build();
-            Assert.Equal($"{inputAlg}-{inputHash} '*'", result);
+            Assert.Equal($"{inputAlg}-{inputHash} *", result);
         }
 
         [Fact]

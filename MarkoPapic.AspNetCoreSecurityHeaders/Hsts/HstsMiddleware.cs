@@ -19,7 +19,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Hsts
 			string maxAgeString = Convert.ToInt64(Math.Floor(options.MaxAge.TotalSeconds)).ToString();
 			string includeSubdomainsString = options.IncludeSubDomains ? "; includeSubDomains" : string.Empty;
 			string preloadString = options.Preload ? "; preload" : string.Empty;
-			headerValue = $"{maxAgeString}{includeSubdomainsString}{preloadString}";
+			headerValue = $"max-age={maxAgeString}{includeSubdomainsString}{preloadString}";
 		}
 
 		public HstsMiddleware(RequestDelegate next, string headerValue)
