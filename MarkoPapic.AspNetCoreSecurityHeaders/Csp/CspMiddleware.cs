@@ -1,5 +1,6 @@
 ﻿using MarkoPapic.AspNetCoreSecurityHeaders.Csp.Options;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp
@@ -17,9 +18,15 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp
 
 		public async Task Invoke(HttpContext context)
 		{
-			string csp = options.Content;
-            if (!string.IsNullOrWhiteSpace(csp))
-			    context.Response.Headers.Add("Content-Security-Policy", csp);
+			if (!string.IsNullOrWhiteSpace(options.Content))
+			{
+				if (options.ReportingGroup != null)
+				{
+					string reportGroupJson = JsonConvert.SerializeObject(options.ReportingGroup);
+					context.Response.Headers.Add("Report-To", reportGroupJson);
+				}
+				context.Response.Headers.Add("Content-Security-Policy", options.Content);
+			}
 			await this.next(context);
 		}
 	}
