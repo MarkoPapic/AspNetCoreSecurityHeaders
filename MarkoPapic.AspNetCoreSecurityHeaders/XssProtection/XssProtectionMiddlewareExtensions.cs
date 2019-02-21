@@ -24,7 +24,6 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.XssProtection
 		/// </summary>
 		/// <param name="app">The <see cref="IApplicationBuilder"/> instance this method extends.</param>
 		/// <param name="optionsAction">A delegate used for setting up the <see cref="XssProtectionOptionsBuilder"/>.</param>
-		/// <returns></returns>
 		public static IApplicationBuilder UseXssProtection(this IApplicationBuilder app, Action<XssProtectionOptionsBuilder> optionsAction)
 		{
 			XssProtectionOptionsBuilder optionsBuilder = new XssProtectionOptionsBuilder();
@@ -38,7 +37,6 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.XssProtection
 		/// </summary>
 		/// <param name="app">The <see cref="IApplicationBuilder"/> instance this method extends.</param>
 		/// <param name="headerValue">Value to be set for X-XSS-Protection header.</param>
-		/// <returns></returns>
 		public static IApplicationBuilder UseXssProtection(this IApplicationBuilder app, string headerValue)
 		{
 			return app.UseMiddleware<XssProtectionMiddleware>(headerValue);
