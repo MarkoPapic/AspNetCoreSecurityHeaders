@@ -1,17 +1,17 @@
 ﻿using System;
 
-namespace MarkoPapic.AspNetCoreSecurityHeaders.XFrameOptions
+namespace MarkoPapic.AspNetCoreSecurityHeaders.FrameOptions
 {
 	/// <summary>
-	/// Used for building <see cref="XFrameOptionsOptions"/>.
+	/// Used for building <see cref="FrameOptionsOptions"/>.
 	/// </summary>
-	public class XFrameOptionsOptionsBuilder
+	public class FrameOptionsOptionsBuilder
 	{
-		private readonly XFrameOptionsOptions options;
+		private readonly FrameOptionsOptions options;
 
-		public XFrameOptionsOptionsBuilder()
+		internal FrameOptionsOptionsBuilder()
 		{
-			options = new XFrameOptionsOptions();
+			options = new FrameOptionsOptions();
 		}
 
 		/// <summary>
@@ -23,7 +23,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.XFrameOptions
 		/// </remarks>
 		public void Deny()
 		{
-			options.Option = XFrameOption.Deny;
+			options.Option = FrameOption.Deny;
 		}
 
 		/// <summary>
@@ -34,7 +34,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.XFrameOptions
 		/// </remarks>
 		public void SameOrigin()
 		{
-			options.Option = XFrameOption.SameOrigin;
+			options.Option = FrameOption.SameOrigin;
 		}
 
 		/// <summary>
@@ -49,11 +49,11 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.XFrameOptions
 			if (domain == null)
 				throw new ArgumentNullException(nameof(domain));
 
-			options.Option = XFrameOption.AllowFromDomain;
+			options.Option = FrameOption.AllowFromDomain;
 			options.AllowedDomain = domain;
 		}
 
-		internal XFrameOptionsOptions Build()
+		internal FrameOptionsOptions Build()
 		{
 			return options;
 		}

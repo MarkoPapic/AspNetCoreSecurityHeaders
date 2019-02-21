@@ -3,14 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MarkoPapic.AspNetCoreSecurityHeaders.XFrameOptions
+namespace MarkoPapic.AspNetCoreSecurityHeaders.FrameOptions
 {
-	public class XFrameOptionsMiddleware
+	public class FrameOptionsMiddleware
 	{
 		private readonly RequestDelegate next;
 		private readonly string headerValue;
 
-		public XFrameOptionsMiddleware(RequestDelegate next, XFrameOptionsOptions options)
+		public FrameOptionsMiddleware(RequestDelegate next, FrameOptionsOptions options)
 		{
 			if (options == null)
 				throw new ArgumentNullException(nameof(options));
@@ -19,19 +19,19 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.XFrameOptions
 
 			switch (options.Option)
 			{
-				case XFrameOption.Deny:
+				case FrameOption.Deny:
 					headerValue = "deny";
 					break;
-				case XFrameOption.SameOrigin:
+				case FrameOption.SameOrigin:
 					headerValue = "sameorigin";
 					break;
-				case XFrameOption.AllowFromDomain:
+				case FrameOption.AllowFromDomain:
 					headerValue = $"allow-from: {options.AllowedDomain}";
 					break;
 			}
 		}
 
-		public XFrameOptionsMiddleware(RequestDelegate next, string headerValue)
+		public FrameOptionsMiddleware(RequestDelegate next, string headerValue)
 		{
 			if (headerValue == null)
 				throw new ArgumentNullException(nameof(headerValue));
