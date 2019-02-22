@@ -4,6 +4,8 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.FrameOptions
 {
 	public class FrameOptionsOptions
 	{
+		internal FrameOptionsOptions() { }
+
 		internal string AllowedDomain { get; set; }
 		internal FrameOption Option { get; set; }
 	}

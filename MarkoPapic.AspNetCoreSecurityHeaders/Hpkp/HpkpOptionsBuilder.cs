@@ -22,9 +22,10 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Hpkp
 		/// Defaults to 5 hours.
 		/// See: https://tools.ietf.org/html/rfc7469#section-2.1.2
 		/// </remarks>
-		public void SetMaxAge(TimeSpan maxAge)
+		public HpkpOptionsBuilder SetMaxAge(TimeSpan maxAge)
 		{
 			options.MaxAge = Convert.ToInt64(Math.Floor(maxAge.TotalSeconds));
+			return this;
 		}
 
 		/// <summary>
@@ -34,7 +35,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Hpkp
 		/// <remarks>
 		/// See: https://tools.ietf.org/html/rfc7469#section-2.1.1
 		/// </remarks>
-		public void AddPins(params string[] pins)
+		public HpkpOptionsBuilder AddPins(params string[] pins)
 		{
 			foreach (string pin in pins)
 			{
@@ -42,6 +43,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Hpkp
 				if (!options.Pins.Contains(item))
 					options.Pins.Add(item);
 			}
+			return this;
 		}
 
 		/// <summary>
@@ -50,20 +52,22 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Hpkp
 		/// <remarks>
 		/// See: https://tools.ietf.org/html/rfc7469#section-2.1.3
 		/// </remarks>
-		public void IncludeSubdomains()
+		public HpkpOptionsBuilder IncludeSubdomains()
 		{
 			options.IncludeSubdomains = true;
+			return this;
 		}
 
 		/// <summary>
 		/// Adds a Report-To header and sets the report-to parameter of the Public-Key-Pins header.
 		/// </summary>
 		/// <param name="optionsAction">A delegate used for setting up the <see cref="ReportGroupOptions"/>.</param>
-		public void AddReportingGroup(Action<ReportGroupOptions> optionsAction)
+		public HpkpOptionsBuilder AddReportingGroup(Action<ReportGroupOptions> optionsAction)
 		{
 			ReportGroupOptions rg = new ReportGroupOptions();
 			optionsAction(rg);
 			options.ReportingGroup = rg;
+			return this;
 		}
 
 		internal HpkpOptions Build()

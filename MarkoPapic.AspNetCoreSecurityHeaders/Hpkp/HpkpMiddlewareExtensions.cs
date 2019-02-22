@@ -5,6 +5,9 @@ using System.Text;
 
 namespace MarkoPapic.AspNetCoreSecurityHeaders.Hpkp
 {
+	/// <summary>
+	/// Extension methods for the HPKP middleware.
+	/// </summary>
 	public static class HpkpMiddlewareExtensions
 	{
 		/// <summary>

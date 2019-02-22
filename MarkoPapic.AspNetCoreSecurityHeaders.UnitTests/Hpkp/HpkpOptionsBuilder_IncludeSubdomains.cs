@@ -13,8 +13,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Hpkp
 			HpkpOptionsBuilder builder = new HpkpOptionsBuilder();
 
 			//Act
-			builder.AddPins("==somepinvalue");
-			builder.IncludeSubdomains();
+			builder.AddPins("==somepinvalue").IncludeSubdomains();
 
 			//Assert
 			HpkpOptions result = builder.Build();

@@ -16,8 +16,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.UnitTests.Hpkp
 			HpkpOptionsBuilder builder = new HpkpOptionsBuilder();
 
 			//Act
-			builder.AddPins("==somepinvalue");
-			builder.SetMaxAge(TimeSpan.FromHours(maxAgeHours));
+			builder.AddPins("==somepinvalue").SetMaxAge(TimeSpan.FromHours(maxAgeHours));
 
 			//Assert
 			HpkpOptions result = builder.Build();
