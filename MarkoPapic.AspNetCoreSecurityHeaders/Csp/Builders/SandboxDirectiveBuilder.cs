@@ -2,6 +2,9 @@
 
 namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 {
+	/// <summary>
+	/// Builder class for Content-Security-Policy header sandbox directive.
+	/// </summary>
 	public class SandboxDirectiveBuilder
 	{
 		private bool noneAllowed;
@@ -17,73 +20,109 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
         private bool scriptsAllowed;
         private bool topNavigationAllowed;
 
+		/// <summary>
+		/// Sets the directive value to 'none'.
+		/// </summary>
 		public SandboxDirectiveBuilder AllowNone()
 		{
 			noneAllowed = true;
 			return this;
 		}
 
+		/// <summary>
+		/// Adds * to the directive value.
+		/// </summary>
 		public SandboxDirectiveBuilder AllowAny()
 		{
 			allAllowed = true;
 			return this;
 		}
 
+		/// <summary>
+		/// Adds 'allow-forms' to the directive value.
+		/// </summary>
 		public SandboxDirectiveBuilder AllowForms()
 		{
 			formsAllowed = true;
 			return this;
 		}
 
-        public SandboxDirectiveBuilder AllowModals()
+		/// <summary>
+		/// Adds 'allow-modals' to the directive value.
+		/// </summary>
+		public SandboxDirectiveBuilder AllowModals()
         {
             modalsAllowed = true;
             return this;
         }
 
-        public SandboxDirectiveBuilder AllowOrientationLock()
+		/// <summary>
+		/// Adds 'allow-orientation-lock' to the directive value.
+		/// </summary>
+		public SandboxDirectiveBuilder AllowOrientationLock()
         {
             orientationLockAllowed = true;
             return this;
         }
 
-        public SandboxDirectiveBuilder AllowPointerLock()
+		/// <summary>
+		/// Adds 'allow-pointer-lock' to the directive value.
+		/// </summary>
+		public SandboxDirectiveBuilder AllowPointerLock()
         {
             pointerLockAllowed = true;
             return this;
         }
 
-        public SandboxDirectiveBuilder AllowPopups()
+		/// <summary>
+		/// Adds 'allow-popups' to the directive value.
+		/// </summary>
+		public SandboxDirectiveBuilder AllowPopups()
         {
             popupsAllowed = true;
             return this;
         }
 
-        public SandboxDirectiveBuilder AllowPopupsToEscapeSandbox()
+		/// <summary>
+		/// Adds 'allow-popups-to-escape-sandbox' to the directive value.
+		/// </summary>
+		public SandboxDirectiveBuilder AllowPopupsToEscapeSandbox()
         {
             popupsAllowedToEscapeSandbox = true;
             return this;
         }
 
-        public SandboxDirectiveBuilder AllowPresentation()
+		/// <summary>
+		/// Adds 'allow-presentation' to the directive value.
+		/// </summary>
+		public SandboxDirectiveBuilder AllowPresentation()
         {
             presentationAllowed = true;
             return this;
         }
 
-        public SandboxDirectiveBuilder AllowSameOrigin()
+		/// <summary>
+		/// Adds 'allow-same-origin' to the directive value.
+		/// </summary>
+		public SandboxDirectiveBuilder AllowSameOrigin()
         {
             sameOriginAllowed = true;
             return this;
         }
 
-        public SandboxDirectiveBuilder AllowScripts()
+		/// <summary>
+		/// Adds 'allow-scripts' to the directive value.
+		/// </summary>
+		public SandboxDirectiveBuilder AllowScripts()
         {
             scriptsAllowed = true;
             return this;
         }
 
-        public SandboxDirectiveBuilder AllowTopNavigation()
+		/// <summary>
+		/// Adds 'allow-top-navigation' to the directive value.
+		/// </summary>
+		public SandboxDirectiveBuilder AllowTopNavigation()
         {
             topNavigationAllowed = true;
             return this;

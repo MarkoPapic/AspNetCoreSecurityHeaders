@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 {
+	/// <summary>
+	/// Builder class for Content-Security-Policy header fetch directives.
+	/// </summary>
 	public class FetchDirectiveBuilder
 	{
 		protected bool noneAllowed;
@@ -23,11 +26,17 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 			hashesAllowed = new List<string>();
 		}
 
+		/// <summary>
+		/// Sets the directive value to 'none'.
+		/// </summary>
 		public FetchDirectiveBuilder AllowNone() {
 			noneAllowed = true;
 			return this;
 		}
 
+		/// <summary>
+		/// Adds 'self' to the directive value.
+		/// </summary>
 		public FetchDirectiveBuilder AllowSelf()
 		{
             string item = "'self'";
@@ -36,11 +45,18 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
             return this;
         }
 
+		/// <summary>
+		/// Adds * to the directive value.
+		/// </summary>
 		public FetchDirectiveBuilder AllowAny() {
             allAllowed = true;
 			return this;
 		}
 
+		/// <summary>
+		/// Adds the host/s to the directive value.
+		/// </summary>
+		/// <param name="hosts">Host/s to be allowed.</param>
 		public FetchDirectiveBuilder AllowHosts(params string[] hosts)
 		{
 			foreach(string host in hosts)
@@ -49,6 +65,10 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
             return this;
         }
 
+		/// <summary>
+		/// Adds the schema's to the directive value.
+		/// </summary>
+		/// <param name="schemas">Schema's to be allowed.</param>
 		public FetchDirectiveBuilder AllowSchemas(params string[] schemas)
 		{
 			foreach(string schema in schemas)
@@ -57,17 +77,27 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
             return this;
 		}
 
+		/// <summary>
+		/// Adds the 'unsafe-inline' to the directive value.
+		/// </summary>
 		public FetchDirectiveBuilder AllowUnsafeInline() {
             unsafeInlineAllowed = true;
 			return this;
 		}
 
+		/// <summary>
+		/// Adds the 'unsafe-eval' to the directive value.
+		/// </summary>
 		public FetchDirectiveBuilder AllowUnsafeEval()
 		{
 			unsafeEvalAllowed = true;
 			return this;
 		}
 
+		/// <summary>
+		/// Adds the nonce (for specific inline scripts) to the directive value.
+		/// </summary>
+		/// <param name="nonceService">Service for generating the nonce.</param>
 		public FetchDirectiveBuilder AllowNonce(ICspNonceService nonceService)
 		{
 
@@ -80,6 +110,10 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 			return this;
 		}
 
+		/// <summary>
+		/// Adds the hash of the script or style to the directive value.
+		/// </summary>
+		/// <param name="item">Directive value in '<hash-algorithm>-<base64-value>' format.</param>
 		public FetchDirectiveBuilder AllowHash(string item)
 		{
 			if (!hashesAllowed.Contains(item))
@@ -87,7 +121,12 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 			return this;
 		}
 
-        public FetchDirectiveBuilder AllowHash(string algorithm, string hashedSource)
+		/// <summary>
+		/// Adds the hash of the script or style to the directive value.
+		/// </summary>
+		/// <param name="algorithm">String representing the encryption algorithm used to chreate the hash.</param>
+		/// <param name="hashedSource">Base64-encoded hash of the script or style.</param>
+		public FetchDirectiveBuilder AllowHash(string algorithm, string hashedSource)
         {
             string item = $"{algorithm}-{hashedSource}";
             if (!hashesAllowed.Contains(item))
@@ -95,12 +134,18 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
             return this;
         }
 
+		/// <summary>
+		/// Adds the 'strict-dynamic' to the directive value.
+		/// </summary>
 		public FetchDirectiveBuilder WithStrictDynamic()
 		{
             withStrictDynamic = true;
 			return this;
 		}
 
+		/// <summary>
+		/// Adds the 'report-sample' to the directive value.
+		/// </summary>
 		public FetchDirectiveBuilder ReportSample()
 		{
 			reportSample = true;

@@ -2,7 +2,10 @@
 
 namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 {
-    public class FrameAncestorsDirectiveBuilder
+	/// <summary>
+	/// Builder class for Content-Security-Policy header frame-ancestor directive.
+	/// </summary>
+	public class FrameAncestorsDirectiveBuilder
     {
         protected bool noneAllowed;
         protected bool allAllowed;
@@ -13,13 +16,19 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
             sourcesAllowed = new List<string>();
         }
 
-        public FrameAncestorsDirectiveBuilder AllowNone()
+		/// <summary>
+		/// Sets the directive value to 'none'.
+		/// </summary>
+		public FrameAncestorsDirectiveBuilder AllowNone()
         {
             noneAllowed = true;
             return this;
         }
 
-        public FrameAncestorsDirectiveBuilder AllowSelf()
+		/// <summary>
+		/// Adds 'self' to the directive value.
+		/// </summary>
+		public FrameAncestorsDirectiveBuilder AllowSelf()
         {
             string item = "'self'";
             if (!sourcesAllowed.Contains(item))
@@ -27,13 +36,20 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
             return this;
         }
 
-        public FrameAncestorsDirectiveBuilder AllowAny()
+		/// <summary>
+		/// Adds * to the directive value.
+		/// </summary>
+		public FrameAncestorsDirectiveBuilder AllowAny()
         {
             allAllowed = true;
             return this;
         }
 
-        public FrameAncestorsDirectiveBuilder AllowHosts(params string[] hosts)
+		/// <summary>
+		/// Adds the host/s to the directive value.
+		/// </summary>
+		/// <param name="hosts">Host/s to be allowed.</param>
+		public FrameAncestorsDirectiveBuilder AllowHosts(params string[] hosts)
         {
             foreach (string host in hosts)
                 if (!sourcesAllowed.Contains(host))
@@ -41,7 +57,11 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
             return this;
         }
 
-        public FrameAncestorsDirectiveBuilder AllowSchemas(params string[] schemas)
+		/// <summary>
+		/// Adds the schema's to the directive value.
+		/// </summary>
+		/// <param name="schemas">Schema's to be allowed.</param>
+		public FrameAncestorsDirectiveBuilder AllowSchemas(params string[] schemas)
         {
             foreach (string schema in schemas)
                 if (!sourcesAllowed.Contains(schema))

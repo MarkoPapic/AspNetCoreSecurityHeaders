@@ -4,7 +4,10 @@ using System.Collections.Generic;
 
 namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 {
-    public class CspOptionsBuilder
+	/// <summary>
+	/// Builder class for Content-Security-Policy header.
+	/// </summary>
+	public class CspOptionsBuilder
     {
         private bool blockAllMixedContent;
         private bool upgrateInsecureRequests;
@@ -33,29 +36,181 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
             RequireSriFor = new RequireSriForDirectiveBuilder();
         }
 
-        public FetchDirectiveBuilder ConnectSources { get; }
-        public FetchDirectiveBuilder DefaultSources { get; }
-        public FetchDirectiveBuilder FontSources { get; }
-        public FetchDirectiveBuilder FrameSources { get; }
-        public FetchDirectiveBuilder ImgSources { get; }
-        public FetchDirectiveBuilder ManifestSources { get; }
-        public FetchDirectiveBuilder MediaSources { get; }
-        public FetchDirectiveBuilder ObjectSources { get; }
-        public FetchDirectiveBuilder PrefetchSources { get; }
-        public FetchDirectiveBuilder ScriptSources { get; }
-        public FetchDirectiveBuilder StyleSources { get; }
-        public FetchDirectiveBuilder WebRtcSources { get; }
-        public FetchDirectiveBuilder WorkerSources { get; }
-        public BaseUriDirectiveBuilder BaseUri { get; }
-        public PluginTypesBuilder PluginTypes { get; }
-        public SandboxDirectiveBuilder Sandbox { get; }
-        //TODO: disown-opener
-        public FormActionDirectiveBuilder FormAction { get; }
-        public FrameAncestorsDirectiveBuilder FrameAncestors { get; }
-        //TODO: navigate-to
-        public void BlockAllMixedContent() => blockAllMixedContent = true;
-        public RequireSriForDirectiveBuilder RequireSriFor { get; }
-        public void UpgradeInsecureRequests() => upgrateInsecureRequests = true;
+		/// <summary>
+		/// Gets the builder for the 'connect-src' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-connect-src
+		/// </remarks>
+		public FetchDirectiveBuilder ConnectSources { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'default-src' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-default-src
+		/// </remarks>
+		public FetchDirectiveBuilder DefaultSources { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'font-src' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-font-src
+		/// </remarks>
+		public FetchDirectiveBuilder FontSources { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'frame-src' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-frame-src
+		/// </remarks>
+		public FetchDirectiveBuilder FrameSources { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'img-src' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-img-src
+		/// </remarks>
+		public FetchDirectiveBuilder ImgSources { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'manifest-src' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-manifest-src
+		/// </remarks>
+		public FetchDirectiveBuilder ManifestSources { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'media-src' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-media-src
+		/// </remarks>
+		public FetchDirectiveBuilder MediaSources { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'object-src' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-object-src
+		/// </remarks>
+		public FetchDirectiveBuilder ObjectSources { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'prefetch-src' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-prefetch-src
+		/// </remarks>
+		public FetchDirectiveBuilder PrefetchSources { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'script-src' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-script-src
+		/// </remarks>
+		public FetchDirectiveBuilder ScriptSources { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'style-src' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-style-src
+		/// </remarks>
+		public FetchDirectiveBuilder StyleSources { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'webrtc-src' directive of the Content-Security-Policy header.
+		/// </summary>
+		public FetchDirectiveBuilder WebRtcSources { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'worker-src' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-worker-src
+		/// </remarks>
+		public FetchDirectiveBuilder WorkerSources { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'base-uri' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-base-uri
+		/// </remarks>
+		public BaseUriDirectiveBuilder BaseUri { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'plugin-types' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-plugin-types
+		/// </remarks>
+		public PluginTypesBuilder PluginTypes { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'sandbox' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-sandbox
+		/// </remarks>
+		public SandboxDirectiveBuilder Sandbox { get; }
+
+		//TODO: disown-opener
+		/// <summary>
+		/// Gets the builder for the 'form-action' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-form-action
+		/// </remarks>
+		public FormActionDirectiveBuilder FormAction { get; }
+
+		/// <summary>
+		/// Gets the builder for the 'frame-ancestors' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-frame-ancestors
+		/// </remarks>
+		public FrameAncestorsDirectiveBuilder FrameAncestors { get; }
+
+		//TODO: navigate-to
+		/// <summary>
+		/// Adds the 'block-all-mixed-content' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/mixed-content/
+		/// </remarks>
+		public void BlockAllMixedContent() => blockAllMixedContent = true;
+
+		/// <summary>
+		/// Gets the builder for the 'require-sri-for' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/SRI/
+		/// </remarks>
+		public RequireSriForDirectiveBuilder RequireSriFor { get; }
+
+		/// <summary>
+		/// Adds the 'upgrade-insecure-requests' directive of the Content-Security-Policy header.
+		/// </summary>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#biblio-upgrade-insecure-requests
+		/// </remarks>
+		public void UpgradeInsecureRequests() => upgrateInsecureRequests = true;
+
+		/// <summary>
+		/// Adds the Report-To header.
+		/// </summary>
+		/// <param name="optionsAction">A delegate used for setting up the <see cref="ReportGroupOptions"/></param>
+		/// <remarks>
+		/// See: https://www.w3.org/TR/CSP/#directive-report-to
+		/// See: https://w3c.github.io/reporting/#group
+		/// </remarks>
 		public void AddReportingGroup(Action<ReportGroupOptions> optionsAction)
 		{
 			ReportGroupOptions rg = new ReportGroupOptions();
