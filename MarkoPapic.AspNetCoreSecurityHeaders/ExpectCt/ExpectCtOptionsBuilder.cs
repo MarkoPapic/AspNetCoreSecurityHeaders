@@ -4,6 +4,9 @@ using System.Text;
 
 namespace MarkoPapic.AspNetCoreSecurityHeaders.ExpectCt
 {
+	/// <summary>
+	/// Used for building <see cref="ExpectCtOptions"/>.
+	/// </summary>
 	public class ExpectCtOptionsBuilder
 	{
 		private readonly ExpectCtOptions options;
