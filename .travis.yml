@@ -1,0 +1,7 @@
+language: csharp
+mono: none
+dotnet: 2.2.0
+script:
+  - dotnet restore
+  - dotnet build ./MarkoPapic.AspNetCoreSecurityHeaders.sln
+  - dotnet test ./MarkoPapic.AspNetCoreSecurityHeaders.UnitTests/
