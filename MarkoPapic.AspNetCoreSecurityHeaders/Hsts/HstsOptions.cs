@@ -17,7 +17,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Hsts
 		public TimeSpan MaxAge { get; set; } = TimeSpan.FromDays(30);
 
 		/// <summary>
-		/// Enables includeSubDomain parameter of the Strict-Transport-Security header.
+		/// Enables includeSubDomains parameter of the Strict-Transport-Security header.
 		/// </summary>
 		/// <remarks>
 		/// See: https://tools.ietf.org/html/rfc6797#section-6.1.2

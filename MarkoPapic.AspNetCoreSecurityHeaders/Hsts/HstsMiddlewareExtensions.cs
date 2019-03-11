@@ -14,6 +14,16 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Hsts
 		/// Adds middleware for using HSTS, which adds the Strict-Transport-Security header.
 		/// </summary>
 		/// <param name="app">The <see cref="IApplicationBuilder"/> instance this method extends.</param>
+		public static IApplicationBuilder UseHsts(this IApplicationBuilder app)
+		{
+			HstsOptions options = new HstsOptions();
+			return app.UseMiddleware<HstsMiddleware>(options);
+		}
+
+		/// <summary>
+		/// Adds middleware for using HSTS, which adds the Strict-Transport-Security header.
+		/// </summary>
+		/// <param name="app">The <see cref="IApplicationBuilder"/> instance this method extends.</param>
 		/// <param name="optionsAction">A delegate used for setting up the <see cref="HstsOptions"/>.</param>
 		public static IApplicationBuilder UseHsts(this IApplicationBuilder app, Action<HstsOptions> optionsAction)
 		{
