@@ -329,7 +329,7 @@ This method will add the `upgrade-insecure-requests` directive to the `Content-S
 
 #### report-to Directive
 
-You can add the [reporting group](https://w3c.github.io/reporting/) for your Content Security policy by calling the `AddReportingGroup(Action<ReportGroupOptions> optionsAction)` method of the `CspOptionsBuilder`:
+You can add the [reporting group](https://w3c.github.io/reporting/) for your Content Security Policy by calling the `AddReportingGroup(Action<ReportGroupOptions> optionsAction)` method of the `CspOptionsBuilder`:
 
 ```cs
 app.UseCsp(x => {
@@ -346,3 +346,218 @@ This will add the appropriate `report-to` directive to the `Content-Security-Pol
 
 
 ### Expect-CT
+
+You can add the `Expect-CT` header using the `UseExpectCt` extension method:
+
+```cs
+app.UseExpectCt(x => x.SetMaxAge(TimeSpan.FromDays(1)).Enforce());
+```
+
+The above example would result in the following HTTP header being added to the HTTP response:
+
+```
+Expect-CT: enforce, max-age=86400
+```
+
+
+#### max-age Directive
+
+You can set the `max-age` directive to the 'Expect-CT' header by calling the `SetMaxAge(TimeSpan maxAge)` method of the `ExpectCtOptionsBuilder`:
+
+```cs
+app.UseExpectCt(x => x.SetMaxAge(TimeSpan.FromDays(2)));
+```
+
+The default value for the `max-age` directive is 1 day.
+
+
+#### enforce Directive
+
+You can add the `enforce` directive to the 'Expect-CT' header by calling the `Enforce()` method of the `ExpectCtOptionsBuilder`:
+
+```cs
+app.UseExpectCt(x => x.Enforce());
+```
+
+
+#### report-uri Directive
+
+You can add the `report-uri` directive to the 'Expect-CT' header by calling the `SetReportUri(string reportUri)` method of the `ExpectCtOptionsBuilder`:
+
+```cs
+app.UseExpectCt(x => x.SetReportUri("https://reportserver.com/uri"));
+```
+
+
+### Public-Key-Pins
+
+You can add the `Public-Key-Pins` header using the `UseExpectCt` extension method:
+
+```cs
+app.UseHpkp(x => x.AddPins("VGhpcyBpcyBzb21lIFN1YmplY3QgUHVibGljIEtleSBJbmZvcm1hdGlvbiBmaW5nZXJwcmludC4=", "QW5kIGFub3RoZXIgU3ViamVjdCBQdWJsaWMgS2V5IEluZm9ybWF0aW9uIGZpbmdlcnByaW50Lg==")
+				.SetMaxAge(TimeSpan.FromHours(3))
+				.IncludeSubdomains());
+```
+
+The above example would result in the following HTTP header being added to the HTTP response:
+
+```
+Public-Key-Pins: pin-sha256="VGhpcyBpcyBzb21lIFN1YmplY3QgUHVibGljIEtleSBJbmZvcm1hdGlvbiBmaW5nZXJwcmludC4="; pin-sha256="QW5kIGFub3RoZXIgU3ViamVjdCBQdWJsaWMgS2V5IEluZm9ybWF0aW9uIGZpbmdlcnByaW50Lg=="; max-age=10800; includeSubDomains
+```
+
+
+#### Adding Pins
+
+You can add pins to the `Public-Key-Pins` header by calling the `AddPins(params string[] pins)` method of the `HpkpOptionsBuilder`:
+
+```cs
+app.UseHpkp(x => x.AddPins("VGhpcyBpcyBzb21lIFN1YmplY3QgUHVibGljIEtleSBJbmZvcm1hdGlvbiBmaW5nZXJwcmludC4="));
+```
+
+
+#### max-age Directive
+
+You can set the `max-age` directive to the `Public-Key-Pins` header by calling the `SetMaxAge(TimeSpan maxAge)` method of the `HpkpOptionsBuilder`:
+
+```cs
+app.UseHpkp(x => x.AddPins("VGhpcyBpcyBzb21lIFN1YmplY3QgUHVibGljIEtleSBJbmZvcm1hdGlvbiBmaW5nZXJwcmludC4=", "QW5kIGFub3RoZXIgU3ViamVjdCBQdWJsaWMgS2V5IEluZm9ybWF0aW9uIGZpbmdlcnByaW50Lg==")
+				.SetMaxAge(TimeSpan.FromHours(3)));
+```
+
+The default value for the `max-age` directive is 5 hours.
+
+
+#### includeSubDomains Directive
+
+You can add the `includeSubDomains` directive to the `Public-Key-Pins` header by calling the `IncludeSubdomains()` method of the `HpkpOptionsBuilder`:
+
+```cs
+app.UseHpkp(x => x.AddPins("VGhpcyBpcyBzb21lIFN1YmplY3QgUHVibGljIEtleSBJbmZvcm1hdGlvbiBmaW5nZXJwcmludC4=", "QW5kIGFub3RoZXIgU3ViamVjdCBQdWJsaWMgS2V5IEluZm9ybWF0aW9uIGZpbmdlcnByaW50Lg==")
+				.IncludeSubdomains());
+```
+
+
+#### report-to Directive
+
+You can add the [reporting group](https://w3c.github.io/reporting/) for your Public Key Pinning Extension by calling the `AddReportingGroup(Action<ReportGroupOptions> optionsAction)` method of the `HpkpOptionsBuilder`:
+
+```cs
+app.UseHpkp(x => {
+	// ...
+	x.AddReportingGroup(rg => {
+		rg.Group = "examplegroup";
+		rg.Endpoints.Add(new ReportGroupEndpoint("https://reportserver.com/report"));
+		rg.IncludeSubdomains = true;
+	});
+});
+```
+
+This will add the appropriate `report-to` directive to the `Public-Key-Pins` header, as well as the `Report-To` header.
+
+
+### Referrer-Policy
+
+You can add the `Referrer-Policy` header using the `UseReferrerPolicy` extension method:
+
+```cs
+app.UseReferrerPolicy(ReferrerPolicyOptions.SameOrigin);
+```
+
+The above example would result in the following HTTP header being added to the HTTP response:
+
+```
+Referrer-Policy: same-origin
+```
+
+The `ReferrerPolicyOptions` enum supports the following values:
+
+| Value  | Description |
+| ------------- | ------------- |
+| `NoReferrerWhenDowngrade`  | Sets the directive value to `no-referrer-when-downgrade`.  |
+| `NoReferrer`  | Sets the directive value to `no-referrer`.  |
+| `Origin`  | Sets the directive value to `origin`.  |
+| `OriginWhenCrossOrigin`  | Sets the directive value to `origin-when-cross-origin`.  |
+| `SameOrigin`  | Sets the directive value to `same-origin`.  |
+| `StrictOrigin`  | Sets the directive value to `strict-origin`.  |
+| `StrictOriginWhenCrossOrigin`  | Sets the directive value to `strict-origin-when-cross-origin`.  |
+| `UnsafeUrl`  | Sets the directive value to `unsafe-url`.  |
+
+
+### Strict-Transport-Security
+
+You can add the `Strict-Transport-Security` header using the `UseHsts` extension method:
+
+```cs
+app.UseHsts();
+```
+
+The above example would result in the following HTTP header being added to the HTTP response:
+
+```
+Strict-Transport-Security: max-age=2592000
+```
+
+
+#### max-age Directive
+
+You can set the `max-age` directive to the `Strict-Transport-Security` header by setting the `MaxAge` property of the `HstsOptions`:
+
+```cs
+app.UseHsts(x => { x.MaxAge = TimeSpan.FromDays(20); });
+```
+
+The default value for the `max-age` directive is 30 days.
+
+
+#### includeSubDomains Directive
+
+You can add the `includeSubDomains` directive to the `Strict-Transport-Security` header by setting the `IncludeSubDomains` property of the `HstsOptions`:
+
+```cs
+app.UseHsts(x => { x.IncludeSubDomains = true; });
+```
+
+
+#### preload Directive
+
+You can add the `preload` directive to the `Strict-Transport-Security` header by setting the `Preload` property of the `HstsOptions`:
+
+```cs
+app.UseHsts(x => { x.Preload = true; });
+```
+
+
+### X-Content-Type-Options
+
+Documentation in progress.
+
+
+### X-Frame-Options
+
+Documentation in progress.
+
+
+### X-Permitted-Cross-Domain-Policies
+
+Documentation in progress.
+
+
+### X-XSS-Protection
+
+Documentation in progress.
+
+
+## Building From Source
+
+```
+git clone https://github.com/MarkoPapic/AspNetCoreSecurityHeaders.git
+cd AspNetCoreSecurityHeaders
+dotnet restore
+dotnet build ./MarkoPapic.AspNetCoreSecurityHeaders.sln
+dotnet test ./MarkoPapic.AspNetCoreSecurityHeaders.UnitTests/
+```
+
+
+## License
+
+[MIT License](https://github.com/MarkoPapic/AspNetCoreSecurityHeaders/blob/master/LICENSE.txt)
