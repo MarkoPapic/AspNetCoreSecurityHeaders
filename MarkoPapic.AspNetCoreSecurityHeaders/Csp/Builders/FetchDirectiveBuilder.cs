@@ -54,7 +54,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 		}
 
 		/// <summary>
-		/// Adds the host/s to the directive value.
+		/// Adds host/s to the directive value.
 		/// </summary>
 		/// <param name="hosts">Host/s to be allowed.</param>
 		public FetchDirectiveBuilder AllowHosts(params string[] hosts)
@@ -66,7 +66,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
         }
 
 		/// <summary>
-		/// Adds the schema's to the directive value.
+		/// Adds schema/s to the directive value.
 		/// </summary>
 		/// <param name="schemas">Schema's to be allowed.</param>
 		public FetchDirectiveBuilder AllowSchemas(params string[] schemas)
@@ -78,7 +78,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 		}
 
 		/// <summary>
-		/// Adds the 'unsafe-inline' to the directive value.
+		/// Adds 'unsafe-inline' to the directive value.
 		/// </summary>
 		public FetchDirectiveBuilder AllowUnsafeInline() {
             unsafeInlineAllowed = true;
@@ -86,7 +86,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 		}
 
 		/// <summary>
-		/// Adds the 'unsafe-eval' to the directive value.
+		/// Adds 'unsafe-eval' to the directive value.
 		/// </summary>
 		public FetchDirectiveBuilder AllowUnsafeEval()
 		{
