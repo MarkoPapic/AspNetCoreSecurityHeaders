@@ -1,5 +1,7 @@
 # MarkoPapic.AspNetCoreSecurityHeaders
 
+[![NuGet Version](https://img.shields.io/nuget/vpre/MarkoPapic.AspNetCoreSecurityHeaders.svg)](https://www.nuget.org/packages/MarkoPapic.AspNetCoreSecurityHeaders/)
+
 A set of Asp.Net Core middlewares for adding security headers to ASP.NET Core web apps.
 
 The library allows you to add the following HTTP security headers:
@@ -20,13 +22,13 @@ The library allows you to add the following HTTP security headers:
 Visual Studio Package Manager Console:
 
 ```
-NuGet command
+Install-Package MarkoPapic.AspNetCoreSecurityHeaders -Version 0.1.0
 ```
 
 dotnet CLI:
 
 ```
-dotnet cli command
+dotnet add package MarkoPapic.AspNetCoreSecurityHeaders --version 0.1.0
 ```
 
 
