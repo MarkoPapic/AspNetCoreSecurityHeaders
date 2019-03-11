@@ -1,5 +1,7 @@
 # MarkoPapic.AspNetCoreSecurityHeaders
 
+[![Build Status](https://travis-ci.org/MarkoPapic/AspNetCoreSecurityHeaders.svg?branch=master)](https://travis-ci.org/MarkoPapic/AspNetCoreSecurityHeaders)
+
 [![NuGet Version](https://img.shields.io/nuget/vpre/MarkoPapic.AspNetCoreSecurityHeaders.svg)](https://www.nuget.org/packages/MarkoPapic.AspNetCoreSecurityHeaders/)
 
 A set of Asp.Net Core middlewares for adding security headers to ASP.NET Core web apps.
