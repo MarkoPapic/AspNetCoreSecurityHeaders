@@ -113,7 +113,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders.Csp.Builders
 		/// <summary>
 		/// Adds the hash of the script or style to the directive value.
 		/// </summary>
-		/// <param name="item">Directive value in '<hash-algorithm>-<base64-value>' format.</param>
+		/// <param name="item">Directive value in '&lt;hash-algorithm&gt;-&lt;base64-value&gt;' format.</param>
 		public FetchDirectiveBuilder AllowHash(string item)
 		{
 			if (!hashesAllowed.Contains(item))

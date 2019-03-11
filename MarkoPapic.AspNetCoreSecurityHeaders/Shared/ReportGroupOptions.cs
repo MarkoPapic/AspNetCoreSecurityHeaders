@@ -8,6 +8,9 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders
 	/// </summary>
 	public class ReportGroupOptions
 	{
+		/// <summary>
+		/// Creates the instance of  <see cref="ReportGroupOptions"/>.
+		/// </summary>
 		public ReportGroupOptions()
 		{
 			Endpoints = new List<ReportGroupEndpoint>();
@@ -70,6 +73,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders
 		/// <summary>
 		/// Sets the 'url' member of the element of the 'endpoints' member of the Report-To header JSON value.
 		/// </summary>
+		/// <remarks>
 		/// See: https://w3c.github.io/reporting/#endpoints-url-member
 		/// </remarks>
 		[JsonProperty(PropertyName = "url")]
@@ -78,6 +82,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders
 		/// <summary>
 		/// Sets the 'priority' member of the element of the 'endpoints' member of the Report-To header JSON value.
 		/// </summary>
+		/// <remarks>
 		/// See: https://w3c.github.io/reporting/#endpoints-priority-member
 		/// </remarks>
 		[JsonProperty(PropertyName = "priority")]
@@ -86,6 +91,7 @@ namespace MarkoPapic.AspNetCoreSecurityHeaders
 		/// <summary>
 		/// Sets the 'weight' member of the element of the 'endpoints' member of the Report-To header JSON value.
 		/// </summary>
+		/// <remarks>
 		/// See: https://w3c.github.io/reporting/#endpoints-weight-member
 		/// </remarks>
 		[JsonProperty(PropertyName = "weight")]
